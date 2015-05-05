@@ -1,0 +1,147 @@
+-- -- source /home/fredy/Documents/Work/dedalus/novaSLA/grails-app/conf/resources/import.sql
+
+-- delete from TOU_APP_MENU_VIEW;
+-- delete from TOU_APP_VIEW_STATE;
+-- delete from TOU_APP_STATE_VIEW_GROUP;
+
+-- INSERT INTO TOU_APP_STATE_VIEW_GROUP (GROUP_NAME, GROUP_ORDER, MODULE) 
+-- VALUES ("Principal", 1, "Main");
+
+-- INSERT INTO TOU_APP_VIEW_STATE (
+-- 	  is_Start_Up
+-- 	, name
+-- 	, url
+-- 	, parent_Name
+-- 	, is_Abstract
+-- 	, view_Group_id
+-- 	, state_Order )
+-- values (
+-- 		true
+-- 	, "Home"
+-- 	, "/home"
+-- 	, "root"
+-- 	, false
+-- 	, (select 		
+-- 		id 
+-- 	 from TOU_APP_STATE_VIEW_GROUP WHERE GROUP_NAME = "Principal")
+-- 	, 1
+-- );
+
+-- INSERT INTO TOU_APP_VIEW_STATE (
+-- 	  is_Start_Up
+-- 	, name
+-- 	, url
+-- 	, parent_Name
+-- 	, is_Abstract
+-- 	, view_Group_id
+-- 	, state_Order  )
+-- values (
+-- 		false
+-- 	, "Acerca de"
+-- 	, "/about"
+-- 	, "root"
+-- 	, false
+-- 	, (select 		
+-- 		id 
+-- 	 from TOU_APP_STATE_VIEW_GROUP WHERE GROUP_NAME = "Principal")
+-- 	, 2
+-- );
+
+-- INSERT INTO TOU_APP_VIEW_STATE (
+-- 	  is_Start_Up
+-- 	, name
+-- 	, url
+-- 	, parent_Name
+-- 	, is_Abstract
+-- 	, view_Group_id
+-- 	, state_Order  )
+-- values (
+-- 		false
+-- 	, "Registro"
+-- 	, "/register"
+-- 	, "root"
+-- 	, false
+-- 	, (select 		
+-- 		id 
+-- 	 from TOU_APP_STATE_VIEW_GROUP WHERE GROUP_NAME = "Principal")
+-- 	, 3
+-- );
+
+-- INSERT INTO TOU_APP_VIEW_STATE (
+-- 	  is_Start_Up
+-- 	, name
+-- 	, url
+-- 	, parent_Name
+-- 	, is_Abstract
+-- 	, view_Group_id
+-- 	, state_Order  )
+-- values (
+-- 		false
+-- 	, "Login"
+-- 	, "/login"
+-- 	, "root"
+-- 	, false
+-- 	, (select id
+-- 	   from TOU_APP_STATE_VIEW_GROUP WHERE GROUP_NAME = "Principal")
+-- 	, 4
+-- );
+
+-- insert into TOU_APP_MENU_VIEW (
+-- 	  controller_name
+-- 	, controller_url 
+-- 	, name           
+-- 	, template_url   
+-- 	, view_state_id 
+-- ) values (
+-- 	  'HomeController'
+-- 	, '/Main/Views/homeController'
+-- 	, 'Home'
+-- 	, '/Main/Views/home'
+-- 	, (select id from TOU_APP_VIEW_STATE
+-- 		where  name = 'Home' and parent_name = 'root')
+-- );
+
+-- insert into TOU_APP_MENU_VIEW (
+-- 	  controller_name
+-- 	, controller_url 
+-- 	, name           
+-- 	, template_url   
+-- 	, view_state_id 
+-- ) values (
+-- 	  'AboutController'
+-- 	, '/Main/Views/aboutController'
+-- 	, 'About'
+-- 	, '/Main/Views/about'
+-- 	, (select id from TOU_APP_VIEW_STATE
+-- 		where  name = 'Acerca de' and parent_name = 'root')
+-- );
+
+-- insert into TOU_APP_MENU_VIEW (
+-- 	  controller_name
+-- 	, controller_url 
+-- 	, name           
+-- 	, template_url   
+-- 	, view_state_id 
+-- ) values (
+-- 	  'RegisterController'
+-- 	, '/Main/Views/registerController'
+-- 	, 'Register'
+-- 	, '/Main/Views/register'
+-- 	, (select id from TOU_APP_VIEW_STATE
+-- 		where  name = 'Registro' and parent_name = 'root')
+-- );
+
+-- insert into TOU_APP_MENU_VIEW (
+-- 	  controller_name
+-- 	, controller_url 
+-- 	, name           
+-- 	, template_url   
+-- 	, view_state_id 
+-- ) values (
+-- 	  'LoginController'
+-- 	, '/Main/Views/loginController'
+-- 	, 'Login'
+-- 	, '/Main/Views/login'
+-- 	, (select id from TOU_APP_VIEW_STATE
+-- 		where  name = 'Login' and parent_name = 'root')
+-- );

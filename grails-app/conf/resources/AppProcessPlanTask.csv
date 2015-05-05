@@ -1,0 +1,3 @@
+ingresarNovedades;El área de nómina ingresa las novedades;Y;CapturarNovedades;1
+aprobarNovedades;El usuario debe aprobar las novedades que así lo requieran;Y;CapturarNovedades;2
+cargarNovedades;El área de nómina carga las novedades al motor de nómina;Y;CapturarNovedades;3

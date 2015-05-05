@@ -1,0 +1,5 @@
+Home;HomeController;/app/login/home-controller;vm;/app/login/home.html;;
+About;AboutController;/app/login/about-controller;vm;/app/login/about.html;;
+Register;RegisterController;/app/login/register-controller;vm;/app/login/register.html;;
+Login;/LoginController;/app/login/login-controller;vm;/app/login/login.html;;
+Logout;LogoutController;/app/login/logout-controller;vm;/app/login/logout.html;;

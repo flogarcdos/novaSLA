@@ -1,0 +1,9 @@
+TypeOfData;Type of data;Character;Y;;;;
+ColProcessType;Payroll process type;Character;Y;;;Colombia;
+ProcessFreq;Process Frequence;Character;Y;Year payments;;;
+DocIdType;Document Id Type;Character;Y;;;Colombia;
+EmployeeStatus;Estado del Empleado;Character;Y;;;;
+EmployeeClass;Clase de Empleado;Character;Y;;;Colombia;
+ContractType;Tipo de Contrato;Character;Y;;;Colombia;
+Relationship;Relación Familiar;Character;Y;;;;
+Gender;Genero;Character;Y;;;;

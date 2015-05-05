@@ -1,0 +1,4 @@
+Payroll;Payroll process;Y;Payroll;payrollBPM
+SS_Contribs;Social Security Contributions Process;Y;SS_Contribs;SS_ContribsBPM
+Accruals;Accruals process;Y;Accruals;AccrualsBPM
+CapturarNovedades;Reporte de novedades de nómina;Y;Payroll;capturarNovedades
