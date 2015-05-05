@@ -6,6 +6,7 @@ class ApplicationApiModel extends TransactionalInformation {
 	def dataItems = []
 
 	ApplicationApiModel() {
+		
 		dataItems = []
 	} 
 }

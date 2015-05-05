@@ -2,8 +2,8 @@ package co.dedalus.novaSLA.model
 
 class TransactionalInformation {
 	Boolean returnStatus
-	List<String> returnMessage
-	Hashtable validationErrors;
+	String returnMessage
+	List<String> validationErrors;
 	int currentMax;  		//totalPages;
 	int currentOffset;   //pageSize;
 	int totalRows;  		// totalCount
@@ -11,7 +11,8 @@ class TransactionalInformation {
 
 	TransactionalInformation() {
 		this.returnStatus = setReturnStatus(false);
-		this.returnMessage = []
+		this.returnMessage = ""
+		this.validationErrors = []
 		this.isAuthenicated = false
 	}
 }

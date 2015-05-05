@@ -43,25 +43,26 @@ class ViewGroupController extends RestfulController{
                 ])
             }
             transactionalInfo.returnStatus = true;
-            transactionalInfo.returnMessage.add("OK")
+            transactionalInfo.returnMessage = "OK"
         }
         catch(Exception e) {
             transactionalInfo.returnStatus = false;
-            transactionalInfo.returnMessage.add(e.getMessage() );                    
+            transactionalInfo.validationErrors.add(e.getMessage() );                    
         }
 
         applicationApiModel.returnMessage = transactionalInfo.returnMessage
+        applicationApiModel.validationErrors = transactionalInfo.validationErrors.toArray()
         applicationApiModel.returnStatus = transactionalInfo.returnStatus;
         applicationApiModel.isAuthenicated = springSecurityService.isLoggedIn()
 
         if (transactionalInfo.returnStatus == false) {
-            applicationApiModel.returnMessage.add (
+            applicationApiModel.validationErrors.add (
                 'Error leyendo el menú de la aplicación. ')
 
-           respond applicationApiModel as JSON, [status: BAD_REQUEST]
+           respond (['data': applicationApiModel] as JSON, [status: BAD_REQUEST])
         }
 
-        applicationApiModel.dataItems = dataItems;
+        applicationApiModel.dataItems = dataItems.toArray();
         applicationApiModel.totalRows = dataItems.size()
         applicationApiModel.currentOffset = offset
         applicationApiModel.currentMax = max

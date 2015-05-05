@@ -26,23 +26,27 @@ class ViewStateController {
       def offset = params.offset ?: 0
 
       def dataItems =[]
+
       try {
          def user = springSecurityService.isLoggedIn() ? springSecurityService.loadCurrentUser() : null
          ViewGroup.list().each { vg ->
             ViewState.findAllByViewGroup(vg).each {vs ->
                Views.findAllByViewState(vs).each{ v-> 
                   dataItems.add ([
-                       'Module' : vg.module
+                       'id': vg.id
+                     , 'Module' : vg.module
                      , 'Group': vg.groupName
                      , 'State' : [
-                          'isStartUp' : vs.isStartUp
+                          'id': vs.id
+                        , 'isStartUp' : vs.isStartUp
                         , 'Name' : vs.name
                         , 'Url' : vs.url
                         , 'Parent' : vs.parentName
                         , 'isAbstract' : vs.isAbstract
                         , 'Order' : vs.stateOrder
                         , 'Views' : [
-                                'name': v.name
+                                'id': v.id
+                              , 'name': v.name
                               , 'controllerName': v.controllerName
                               , 'controllerUrl': v.controllerUrl
                               , 'templateUrl': v.templateUrl
@@ -54,27 +58,28 @@ class ViewStateController {
          }  // ViewGroup
 
          transactionInf.returnStatus = true;
-         transactionInf.returnMessage.add("OK");
+         transactionInf.returnMessage = 'OK';
       }
       catch (Exception e) {
          transactionInf.returnStatus = false;
-         transactionInf.returnMessage.add(e.getMessage() ); 
+         transactionInf.validationErrors.add(e.getMessage() )
       }
 
       applicationApiModel.returnStatus = transactionInf.returnStatus;
-      applicationApiModel.returnMessage = transactionInf.returnMessage
+      applicationApiModel.validationErrors = transactionInf.validationErrors;
+      applicationApiModel.returnMessage = transactionInf.returnMessage;
       applicationApiModel.isAuthenicated = springSecurityService.isLoggedIn()
 
       if (transactionInf.returnStatus == false) {
-         respond applicationApiModel as JSON, [status: BAD_REQUEST]
+         respond (['data': applicationApiModel] as JSON, [status: BAD_REQUEST])
       }
 
-      applicationApiModel.dataItems = dataItems;
+      applicationApiModel.dataItems = dataItems.toArray();
       applicationApiModel.totalRows = dataItems.size()
       applicationApiModel.currentOffset = offset
       applicationApiModel.currentMax = max
 
-      respond (['data': applicationApiModel] as JSON, [
+      respond ( ['data': applicationApiModel ] as JSON, [
          status: OK,
          excludes: ['class', 'version']
       ])
