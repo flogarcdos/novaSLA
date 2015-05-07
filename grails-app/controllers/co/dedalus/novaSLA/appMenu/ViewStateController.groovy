@@ -3,6 +3,7 @@ package co.dedalus.novaSLA.appMenu
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import grails.plugin.springsecurity.SpringSecurityService
+import grails.util.GrailsNameUtils
 import grails.transaction.Transactional
 import static org.springframework.http.HttpStatus.*
 
@@ -58,23 +59,23 @@ class ViewStateController {
          }  // ViewGroup
 
          transactionInf.returnStatus = true;
-         transactionInf.returnMessage = 'OK';
+         transactionInf.returnMessage.add( 'OK' );
       }
       catch (Exception e) {
          transactionInf.returnStatus = false;
-         transactionInf.validationErrors.add(e.getMessage() )
+         transactionInf.validationErrors.put( getClass(), e.getMessage() )
       }
 
       applicationApiModel.returnStatus = transactionInf.returnStatus;
-      applicationApiModel.validationErrors = transactionInf.validationErrors;
       applicationApiModel.returnMessage = transactionInf.returnMessage;
+      applicationApiModel.validationErrors = transactionInf.validationErrors;
       applicationApiModel.isAuthenicated = springSecurityService.isLoggedIn()
 
       if (transactionInf.returnStatus == false) {
          respond (['data': applicationApiModel] as JSON, [status: BAD_REQUEST])
       }
 
-      applicationApiModel.dataItems = dataItems.toArray();
+      applicationApiModel.dataItems = dataItems;
       applicationApiModel.totalRows = dataItems.size()
       applicationApiModel.currentOffset = offset
       applicationApiModel.currentMax = max

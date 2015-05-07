@@ -5,7 +5,9 @@ import grails.plugin.springsecurity.annotation.Secured
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.rest.RestfulController
 import grails.transaction.Transactional
+import grails.util.GrailsNameUtils
 import static org.springframework.http.HttpStatus.*
+
 
 import co.dedalus.novaSLA.appMenu.*
 import co.dedalus.novaSLA.model.*
@@ -43,26 +45,26 @@ class ViewGroupController extends RestfulController{
                 ])
             }
             transactionalInfo.returnStatus = true;
-            transactionalInfo.returnMessage = "OK"
+            transactionalInfo.returnMessage.add("OK")
         }
         catch(Exception e) {
             transactionalInfo.returnStatus = false;
-            transactionalInfo.validationErrors.add(e.getMessage() );                    
+            transactionalInfo.validationErrors.put(getClass(), e.getMessage() );                    
         }
 
         applicationApiModel.returnMessage = transactionalInfo.returnMessage
-        applicationApiModel.validationErrors = transactionalInfo.validationErrors.toArray()
+        applicationApiModel.validationErrors = transactionalInfo.validationErrors
         applicationApiModel.returnStatus = transactionalInfo.returnStatus;
         applicationApiModel.isAuthenicated = springSecurityService.isLoggedIn()
 
         if (transactionalInfo.returnStatus == false) {
-            applicationApiModel.validationErrors.add (
-                'Error leyendo el menú de la aplicación. ')
+            applicationApiModel.validationErrors.put (
+                'error', 'Leyendo el menú de la aplicación. ')
 
            respond (['data': applicationApiModel] as JSON, [status: BAD_REQUEST])
         }
 
-        applicationApiModel.dataItems = dataItems.toArray();
+        applicationApiModel.dataItems = dataItems
         applicationApiModel.totalRows = dataItems.size()
         applicationApiModel.currentOffset = offset
         applicationApiModel.currentMax = max
