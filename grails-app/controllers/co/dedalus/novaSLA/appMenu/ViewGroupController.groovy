@@ -34,6 +34,16 @@ class ViewGroupController extends RestfulController{
         max = params.max ?: 10
         def offset = params.offset ?: 0
 
+         println springSecurityService.authentication.principal.getUsername() ; //rfeynman
+         println springSecurityService.currentUser ; //co.dedalus.novaSLA.auth.AppUser : 1
+         println springSecurityService.loadCurrentUser() ; // co.dedalus.novaSLA.auth.AppUser : 1
+         println springSecurityService.principal ; 
+            // grails.plugin.springsecurity.userdetails.GrailsUser@937d014: 
+            // Username: rfeynman; Password: [PROTECTED]; Enabled: true; 
+            // AccountNonExpired: true; credentialsNonExpired: true; 
+            // AccountNonLocked: true; Granted Authorities: ROLE_ADMIN
+
+
         def dataItems = []
         
         try {
