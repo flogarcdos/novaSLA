@@ -52,9 +52,8 @@ grails.project.dependency.resolution = {
         // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
         runtime "mysql:mysql-connector-java:5.1.34"
-        
+
         test "org.gebish:geb-spock:0.10.0"
-        compile ":rest-client-builder:2.1.1"
 
     }
 
@@ -80,6 +79,7 @@ grails.project.dependency.resolution = {
         }      
 
         test ":geb:0.10.0"
+        compile  ":rest-client-builder:2.1.1"
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"
